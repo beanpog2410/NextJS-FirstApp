@@ -31,7 +31,7 @@ export default function PostList({posts, addtionPath}) {
       postByPage.push(posts.slice(i, i + itemPerPage));
     }
 
-    if (!postByPage) {
+    if (!postByPage[page-1]) {
       return <></>;
     }
 
