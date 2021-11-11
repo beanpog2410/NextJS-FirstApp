@@ -32,6 +32,10 @@ const Post = () => {
   const posts = useSelector((state) => state.posts.posts);
   let post = posts.filter((item) => item.id == id)[0];
 
+  if (!post) {
+    return <></>;
+  }
+
   return (
     <Container>
       <Grid container justifyContent="center">

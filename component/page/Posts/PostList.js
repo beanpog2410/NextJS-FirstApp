@@ -31,6 +31,10 @@ export default function PostList({posts, addtionPath}) {
       postByPage.push(posts.slice(i, i + itemPerPage));
     }
 
+    if (!postByPage) {
+      return <></>;
+    }
+
     return (
         <Grid container justifyContent="center" alignItems="center" spacing={3}>
         {postByPage[page-1].map((post) => {

@@ -32,55 +32,59 @@ const Recruitment = () => {
   const recruitments = useSelector((state) => state.recruitments.recruitments);
   let recruitment = recruitments.filter((item) => item.id == id)[0];
 
-  return (
-    <Container>
-      <Grid container justifyContent="center">
-        <Grid item xs={12} sm={8}>
-          <Card>
-            <CardHeader
-              title={recruitment.title}
-              subheader={moment(recruitment.date, "YYYY-MM-DD").format("ll")}
-              classes={{
-                title: classes.title,
-                subheader: classes.subheader,
-              }}
-            ></CardHeader>
-            <Divider />
-            <CardContent className={classes.content}>
-              {recruitment.image ? (
-                <Image
-                  src={recruitment.image}
-                  width="600"
-                  height="400"
-                  className={classes.image}
-                ></Image>
-              ) : null}
-              {recruitment.content ? (
-                <Typography
-                  variant="body1"
-                  component="p"
-                  className={classes.text}
-                >
-                  {recruitment.content}
-                </Typography>
-              ) : null}
-              {recruitment.textFile ? (
-                <PDFViewer
-                  filePath={recruitment.textFile}
-                  post={true}
-                ></PDFViewer>
-              ) : null}
-            </CardContent>
-          </Card>
-        </Grid>
-        <Hidden smDown>
-          <Grid item sm={4}>
-            <NewestList />
+  if (!recruitment) {
+    return <></>;
+  } else {
+    return (
+      <Container>
+        <Grid container justifyContent="center">
+          <Grid item xs={12} sm={8}>
+            <Card>
+              <CardHeader
+                title={recruitment.title}
+                subheader={moment(recruitment.date, "YYYY-MM-DD").format("ll")}
+                classes={{
+                  title: classes.title,
+                  subheader: classes.subheader,
+                }}
+              ></CardHeader>
+              <Divider />
+              <CardContent className={classes.content}>
+                {recruitment.image ? (
+                  <Image
+                    src={recruitment.image}
+                    width="600"
+                    height="400"
+                    className={classes.image}
+                  ></Image>
+                ) : null}
+                {recruitment.content ? (
+                  <Typography
+                    variant="body1"
+                    component="p"
+                    className={classes.text}
+                  >
+                    {recruitment.content}
+                  </Typography>
+                ) : null}
+                {recruitment.textFile ? (
+                  <PDFViewer
+                    filePath={recruitment.textFile}
+                    post={true}
+                  ></PDFViewer>
+                ) : null}
+              </CardContent>
+            </Card>
           </Grid>
-        </Hidden>
-      </Grid>
-    </Container>
-  );
+          <Hidden smDown>
+            <Grid item sm={4}>
+              <NewestList />
+            </Grid>
+          </Hidden>
+        </Grid>
+      </Container>
+    );
+  }
 };
 
 export default Recruitment;
